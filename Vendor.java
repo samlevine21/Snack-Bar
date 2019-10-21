@@ -6,80 +6,94 @@
 public class Vendor
 {
   // Fields:
-  ...
+  private int price; //in cents
+  private int totalDeposited; //in cents
+  private int change; //in cents
+  private int stock; 
 
-  //  Constructor
-  //  Parameters:
+  // Constructor
+  // Parameters:
   //    int price of a single item in cents
   //    int number of items to place in stock
-  ... Vendor ...
+  public Vendor(int newPrice, int newStock)
   {
-    ...
+    price = newPrice;
+    stock = newStock;
+    totalDeposited = 0;
+    change = 0;
   }
 
-  //  Sets the quantity of items in stock.
-  //  Parameters:
-  //    int number of items to place in stock
-  //  Return:
-  //    None
-  ... setStock ...
+  // Sets the quantity of items in stock.
+  // Parameters:
+  //   int number of items to place in stock
+  // Return:
+  //   None
+  public void setStock(int newStock)
   {
-    ...
+    stock = newStock;
   }
 
-  //  Returns the number of items currently in stock.
-  //  Parameters:
-  //    None
-  //  Return:
-  //    int number of items currently in stock
-  ... getStock ...
+  // Returns the number of items currently in stock.
+  // Parameters:
+  //   None
+  // Return:
+  //   int number of items currently in stock
+  public int getStock()
   {
-    ...
+    return stock;
   }
 
-  //  Adds a specified amount (in cents) to the deposited amount.
-  //  Parameters:
-  //    int number of cents to add to the deposit
-  //  Return:
-  //    None
-  ... addMoney ...
+  // Adds a specified amount (in cents) to the deposited amount.
+  // Parameters:
+  //   int number of cents to add to the deposit
+  // Return:
+  //   None
+  public void addMoney(int deposit)
   {
-    ...
+    totalDeposited += deposit;
   }
 
-  //  Returns the currently deposited amount (in cents).
-  //  Parameters:
-  //    None
-  //  Return:
-  //    int number of cents in the current deposit
-  ... getDeposit ...
+  // Returns the currently deposited amount (in cents).
+  // Parameters:
+  //   None
+  // Return:
+  //   int number of cents in the current deposit
+  public int getDeposit()
   {
-    ...
+    return totalDeposited;
   }
 
-  //  Implements a sale.  If there are items in stock and
-  //  the deposited amount is greater than or equal to
-  //  the single item price, then adjusts the stock
-  //  and calculates and sets change and returns true;
-  //  otherwise refunds the whole deposit (moves it into change)
-  //  and returns false.
-  //  Parameters:
-  //    None
-  //  Return:
-  //    boolean successful sale (true) or failure (false)
-  ... makeSale ...
+  // Implements a sale.  If there are items in stock and
+  // the deposited amount is greater than or equal to
+  // the single item price, then adjusts the stock
+  // and calculates and sets change and returns true;
+  // otherwise refunds the whole deposit (moves it into change)
+  // and returns false.
+  // Parameters:
+  //   None
+  // Return:
+  //   boolean successful sale (true) or failure (false)
+  public boolean makeSale()
   {
-    ...
+    if (totalDeposited >= price && stock >= 1) {
+        stock -=1;
+        change = totalDeposited - price;
+        return true;
+    }
+    else {
+        change = totalDeposited;
+        return false;
+    }
   }
 
-  //  Returns and zeroes out the amount of change (from the last
-  //  sale or refund).
-  //  Parameters:
-  //    None
-  //  Return:
-  //    int number of cents in the current change
-  ... getChange ...
+  // Returns and zeroes out the amount of change (from the last
+  // sale or refund).
+  // Parameters:
+  //   None
+  // Return:
+  //   int number of cents in the current change
+  public int getChange()
   {
-    ...
+    return change;
   }
 }
