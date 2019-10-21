@@ -30,7 +30,7 @@ public class Vendor
   //   None
   public void setStock(int newStock)
   {
-    stock = newStock;
+    stock = newStock; //new stock in machine
   }
 
   // Returns the number of items currently in stock.
@@ -40,7 +40,7 @@ public class Vendor
   //   int number of items currently in stock
   public int getStock()
   {
-    return stock;
+    return stock; //returns stock in the machine
   }
 
   // Adds a specified amount (in cents) to the deposited amount.
@@ -50,7 +50,7 @@ public class Vendor
   //   None
   public void addMoney(int deposit)
   {
-    totalDeposited += deposit;
+    totalDeposited += deposit; //adds our deposit to the money in machine
   }
 
   // Returns the currently deposited amount (in cents).
@@ -60,7 +60,7 @@ public class Vendor
   //   int number of cents in the current deposit
   public int getDeposit()
   {
-    return totalDeposited;
+    return totalDeposited; //returns amount of money in machine
   }
 
   // Implements a sale.  If there are items in stock and
@@ -75,13 +75,15 @@ public class Vendor
   //   boolean successful sale (true) or failure (false)
   public boolean makeSale()
   {
-    if (totalDeposited >= price && stock >= 1) {
-        stock -=1;
-        change = totalDeposited - price;
+    if (totalDeposited >= price && stock >= 1) { //if we have enough money AND stock
+        stock -=1; //removes one from stock
+        change = totalDeposited - price; //sets our change
+        totalDeposited = 0; //removes the deposited money
         return true;
     }
-    else {
-        change = totalDeposited;
+    else { //if there isn't enough money OR enough stock
+        change = totalDeposited; //gives back money (failed sale)
+        totalDeposited = 0;
         return false;
     }
   }
